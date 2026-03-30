@@ -6,6 +6,6 @@ authors = ["chillcicada"]
 license = "MIT"
 description = "Convert ASCII art diagrams into SVG by aasvg-rs"
 
-homepage = "https://github.com/Enter-tainer/zint-wasi"
-repository = "https://github.com/Enter-tainer/zint-wasi"
+homepage = "https://github.com/chillcicada/typst-aasvg"
+repository = "https://github.com/chillcicada/typst-aasvg"
 keywords = ["wasm", "aasvg"]
