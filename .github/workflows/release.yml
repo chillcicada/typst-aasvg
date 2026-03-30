@@ -1,0 +1,72 @@
+name: Release package
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+env:
+  REGISTRY_REPO: chillcicada/typst-packages
+  PATH_PREFIX: packages/preview
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup mold
+        uses: rui314/setup-mold@v1
+
+      - name: Install rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with: { targets: wasm32-unknown-unknown }
+
+      - name: Build wasm package
+        run: cargo build --release --target wasm32-unknown-unknown
+
+      - name: Determine and check package metadata
+        run: |
+          PKG_PREFIX=$(grep -oP 'name\s*=\s*"\K[^"]*' package/typst.toml)
+          VERSION=$(grep -oP 'version\s*=\s*"\K[^"]*' package/typst.toml)
+          echo "PKG_NAME=${PKG_PREFIX}" >> "${GITHUB_ENV}"
+          echo "PKG_VERSION=${VERSION}" >> "${GITHUB_ENV}"
+
+          # Version check for typst.toml
+          if [[ "${GITHUB_REF_NAME}" != "v${VERSION}" ]]; then
+            echo "package v${VERSION} does not match release tag ${GITHUB_REF_NAME}" >&2
+            exit 1
+          fi
+
+      - name: Checkout package registry
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ env.REGISTRY_REPO }}
+          token: ${{ secrets.REGISTRY_TOKEN }}
+          path: typst-packages
+
+      - name: Release package
+        run: |
+          mkdir -p "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME/$PKG_VERSION"
+
+          cp LICENSE "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME/$PKG_VERSION/"
+          cp README.md "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME/$PKG_VERSION/"
+          cp package/lib.typ "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME/$PKG_VERSION/"
+          cp package/typst.toml "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME/$PKG_VERSION/"
+          cp target/wasm32-unknown-unknown/release/typst_aasvg.wasm "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME/$PKG_VERSION/"
+
+          GIT_USER_NAME="$(git log -1 --pretty=format:'%an')"
+          GIT_USER_EMAIL="$(git log -1 --pretty=format:'%ae')"
+
+          cd typst-packages
+          git branch -D "${PKG_NAME}-${PKG_VERSION}" || true
+          git config user.name "${GIT_USER_NAME}"
+          git config user.email "${GIT_USER_EMAIL}"
+          git checkout -b "${PKG_NAME}-${PKG_VERSION}"
+          git add .
+          git commit -m "${PKG_NAME}:${PKG_VERSION}
+
+          > Auto-generated release commit by GitHub Actions"
+          git push --set-upstream origin "${PKG_NAME}-${PKG_VERSION}" --force

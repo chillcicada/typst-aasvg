@@ -4,8 +4,7 @@ version = "0.1.0"
 entrypoint = "lib.typ"
 authors = ["chillcicada"]
 license = "MIT"
-description = "Convert ASCII art diagrams into SVG by aasvg-rs"
-
+description = "Convert ASCII art diagrams into SVG powered by aasvg-rs"
 homepage = "https://github.com/chillcicada/typst-aasvg"
 repository = "https://github.com/chillcicada/typst-aasvg"
 keywords = ["wasm", "aasvg"]
