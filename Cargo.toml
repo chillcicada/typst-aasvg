@@ -7,7 +7,7 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-aasvg = "1.0.0"
+aasvg = { git = "https://github.com/chillcicada/aasvg-rs", branch = "dev" }
 ciborium = "0.2.2"
 serde = "1.0.228"
 wasm-minimal-protocol = "0.1.0"

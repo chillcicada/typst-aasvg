@@ -5,8 +5,7 @@ version = 4
 [[package]]
 name = "aasvg"
 version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f82509a4fd112244705d14c6d5780862ad279ca76ae8288ff8415fbc717e69ef"
+source = "git+https://github.com/chillcicada/aasvg-rs?branch=dev#d9a273c2477d482d49317ac15ced53574fb4e01e"
 
 [[package]]
 name = "cfg-if"
