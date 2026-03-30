@@ -10,7 +10,7 @@ A Typst package for converting ASCII art diagrams into SVG, powered by [aasvg-rs
 
 - `str` (string, required) — The ASCII art diagram as a string
 - `backdrop` (boolean, default: `false`) — Enable backdrop
-- `disable_text` (boolean, default: `false`) — Disable text rendering
+- `disable-text` (boolean, default: `false`) — Disable text rendering
 - `spaces` (integer, default: `2`) — Number of spaces for tab replacement
 - `stretch` (boolean, default: `false`) — Stretch to fit
 - `..args` — Additional arguments passed to `image()`
@@ -23,7 +23,7 @@ A Typst package for converting ASCII art diagrams into SVG, powered by [aasvg-rs
 
 ## Example
 
-See [example.typ](package/example.typ) and [example.txt](package/example.txt) for a demonstration.
+See [example.typ](https://github.com/chillcicada/typst-aasvg/blob/v0.1.0/package/example.typ) and [example.pdf](https://github.com/chillcicada/typst-aasvg/blob/v0.1.0/package/example.pdf).
 
 ## Build
 
