@@ -5,7 +5,10 @@ version = 4
 [[package]]
 name = "aasvg"
 version = "1.0.0"
-source = "git+https://github.com/chillcicada/aasvg-rs?branch=dev#d9a273c2477d482d49317ac15ced53574fb4e01e"
+source = "git+https://github.com/chillcicada/aasvg-rs?branch=dev#7d0d3454612cf1ffb8f0f63a25485ed0c0c7211c"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "cfg-if"
@@ -122,7 +125,6 @@ version = "0.1.0"
 dependencies = [
  "aasvg",
  "ciborium",
- "serde",
  "wasm-minimal-protocol",
 ]
 
