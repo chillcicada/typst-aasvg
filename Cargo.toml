@@ -1,0 +1,20 @@
+[package]
+name = "typst-aasvg"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+aasvg = "1.0.0"
+ciborium = "0.2.2"
+serde = "1.0.228"
+wasm-minimal-protocol = "0.1.0"
+
+[profile.release]
+opt-level = "z"
+strip = true
+lto = true
+panic = "abort"
+codegen-units = 1
