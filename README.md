@@ -16,7 +16,7 @@ A Typst package for converting ASCII art diagrams into SVG, powered by [aasvg-rs
 - `..args` — Additional arguments passed to `image()`
 
 ```typst
-#import "@preview/aasvg:0.1.0": aasvg
+#import "@preview/aa-draw:0.1.0": aasvg
 
 #aasvg("A --> B")
 ```
