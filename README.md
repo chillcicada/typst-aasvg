@@ -33,6 +33,16 @@ cargo build --release --target wasm32-unknown-unknown
 
 The WASM artifact will be output to `target/wasm32-unknown-unknown/release/typst_aasvg.wasm`.
 
+```bash
+cp target/wasm32-unknown-unknown/release/typst_aasvg.wasm package/
+```
+
+Use `wasm-opt` to optimize the WASM file:
+
+```bash
+wasm-opt -Oz --all-features package/typst_aasvg.wasm -o package/typst_aasvg.wasm
+```
+
 ## License
 
 [MIT](LICENSE)

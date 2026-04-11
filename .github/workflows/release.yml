@@ -25,7 +25,16 @@ jobs:
         with: { targets: wasm32-unknown-unknown }
 
       - name: Build wasm package
-        run: cargo build --release --target wasm32-unknown-unknown
+        run: |
+          cargo build --release --target wasm32-unknown-unknown
+          cp target/wasm32-unknown-unknown/release/typst_aasvg.wasm package/
+
+      - name: Optimize wasm package
+        uses: NiklasEi/wasm-opt-action@v2
+        with:
+          file: package/typst_aasvg.wasm
+          optimize_all: true
+          options: -Oz
 
       - name: Determine and check package metadata
         run: |
