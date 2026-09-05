@@ -146,9 +146,9 @@ dependencies = [
 
 [[package]]
 name = "wasm-minimal-protocol"
-version = "0.1.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "264a7e0acbdd292aca03fee87eaea5a07647394c8985b19be27e950bde57930a"
+checksum = "3a68dc57cf1a4c4e99a8dbe5a7d76f37bfd7db89860b6797c027027acf6da50a"
 dependencies = [
  "proc-macro2",
  "quote",
